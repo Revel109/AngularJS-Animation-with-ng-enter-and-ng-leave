@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="App">
+<head>
+	<meta charset="utf-8">
+	<title>Animate Example</title>
+	<style type="text/css">
+		.ng-enter{
+			transition: 0.75s;
+			opacity: 0;
+		}
+		.ng-enter-stagger{
+			transition-delay: 0.1s;
+
+		}
+		.ng-enter-active{
+			opacity: 1;
+
+		}
+		.ng-leave{
+			transition: 0.75s;
+			opacity: 1;
+
+		}
+
+		.ng-leave-stagger{
+			transition-delay: 0.1s;
+
+		}
+		.ng-leave-active{
+			opacity: 0;
+
+		}
+
+
+	</style>
+</head>
+<body>
+	<div ng-controller="theController" style="width: 600px;margin: 0px auto">
+	    <button ng-click="addItems()">Add</button>
+		<button ng-click="clearItems()">Clear</button>
+		<hr />
+		<button ng-repeat="item in items" ng-click="removeItems($animate)">
+			{{item.title}}
+		</button>
+		
+	</div>
+  <script type="text/javascript" src="/js/angular.js"></script> 
+  <script type="text/javascript" src="/js/angular-animate.js"></script> 
+  
+  <script type="text/javascript">
+  	
+  angular.module('App',['ngAnimate']).
+  controller('theController',['$scope',function($scope){
+     $scope.items=[];
+      $scope.addItems = function(){
+        for(i=10;i--;){
+          $scope.items.push({'title':'item'+ i})
+         }
+      }
+      $scope.clearItems = function(){
+
+          $scope.items=[];
+      }
+      $scope.removeItems = function(animate){
+
+      	 $scope.items.splice(animate, 1)
+
+      }
+
+  }])
+
+
+  </script>
+  
+
+</body>
+</html>
